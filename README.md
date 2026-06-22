@@ -155,7 +155,7 @@ sudo apt update -y
 sudo apt install default-jre -y
 
 # 3. Tải bộ cài JMeter chuẩn
-wget https://apache.org
+wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.3.tgz
 
 # 4. Giải nén bộ công cụ
 tar -xf apache-jmeter-5.6.3.tgz
