@@ -96,3 +96,45 @@ Kết quả thực thi chế độ CLI cho file kịch bản Sampler đạt tỷ
 
 * **Xác thực cấu trúc:** Điểm thành công lớn nhất của phần này là hệ thống máy chủ `httpbin.org` đã tiếp nhận và phân tích cú pháp (Parse) chính xác cả dữ liệu dạng thuộc tính Form lẫn chuỗi JSON API mà không hề phát sinh lỗi định dạng (Tỷ lệ lỗi duy trì tuyệt đối `0.00%`).
 * **Đặc trưng hiệu năng phương thức:** Yêu cầu `HTTP GET Request` ghi nhận thời gian phản hồi trung bình lớn nhất (`8,457 ms`). Điều này cho thấy việc tải và hiển thị toàn bộ cấu trúc dữ liệu thô từ máy chủ phản hồi tốn thời gian hơn so với việc đẩy các gói dữ liệu có dung lượng nhẹ (`POST Form/JSON`) lên hàng đợi xử lý.
+
+---
+
+## PHẦN 3: NGHIÊN CỨU VÀ THỰC HÀNH CẤU HÌNH LOGIC CONTROLLERS (BỘ ĐIỀU KHIỂN LOGIC)
+
+Mục tiêu của phần này là áp dụng các cấu trúc điều khiển tư duy logic (vòng lặp và điều kiện rẽ nhánh) vào kịch bản kiểm thử nhằm điều phối hành vi gửi request của người dùng ảo theo các quy tắc nghiệp vụ phức tạp.
+
+### 3.1. Thiết kế cấu trúc kịch bản Logic Controllers
+
+Kịch bản sử dụng tệp cấu hình độc lập `phan3_controllers.jmx` bao gồm các thành phần điều khiển cốt lõi sau:
+
+1. **Khai báo biến điều kiện (User Defined Variables):**
+   * Định nghĩa một biến logic toàn cục tên là `chay_post_request` với giá trị chuỗi là `true`.
+2. **Bộ điều khiển vòng lặp - Loop Controller (Ép lặp lại thao tác):**
+   * Thiết lập cấu hình số lần lặp nội bộ là `3 lần`.
+   * Đối tượng chịu tác động: Yêu cầu đọc dữ liệu `Controller - HTTP GET Trong Vong Lap`. Đối với mỗi vòng lặp chính của User ảo, yêu cầu này sẽ bị bắt buộc thực thi liên tục 3 lần.
+3. **Bộ điều khiển điều kiện - If Controller (Rẽ nhánh hành động):**
+   * Thiết lập biểu thức điều kiện kiểm tra logic: `"${chay_post_request}" == "true"`.
+   * Đối tượng chịu tác động: Yêu cầu `Controller - HTTP POST Thoa Dieu Kien`. Yêu cầu này chỉ được phép kích hoạt và gửi tới máy chủ nếu điều kiện cấu hình biến ở mục 1 trả về kết quả đúng (`true`).
+
+---
+
+### 3.2. Kết quả thực hiện và Biểu đồ minh họa Phần 3
+
+Kết quả thực thi kịch bản điều khiển logic ghi nhận độ phân bổ mẫu kiểm thử và phân tích lỗi chi tiết:
+
+![Biểu đồ kết quả phần 3](ketqua_phan3.png)
+
+#### Bảng phân tích số liệu hiệu năng chi tiết (Logic Controllers Statistics)
+
+| Nhãn kiểm thử (Controller Label) | Số lượng mẫu (Samples) | Số lượng lỗi (FAIL) | Tỷ lệ lỗi (% Error) | Thời gian phản hồi trung bình (Average) | Thời gian phản hồi lớn nhất (Max) | Tần suất xử lý (Throughput) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Controller - HTTP GET Trong Vong Lap** | 10 | 0 | 0.00% | 5,674 ms | 34,089 ms | 0.13 req/s |
+| **Controller - HTTP POST Thoa Dieu Kien** | 10 | 1 | 10.00% | 4,370 ms | 21,172 ms | 0.13 req/s |
+| **TỔNG THỂ PHẦN 3 (Total)** | **20** | **1** | **5.00%** | **5,022 ms** | **34,089 ms** | **0.28 req/s** |
+
+---
+
+### 3.3. Nhận xét và Đánh giá kết quả Phần 3
+
+* **Đánh giá logic:** Bộ điều khiển `If Controller` đã hoạt động chính xác theo đúng thiết kế kỹ thuật, nhận diện biến cấu hình là `true` để cho phép các yêu cầu POST truyền tải thành công. 
+* **Phân tích hiện tượng lỗi (Error Analysis):** Yêu cầu POST ghi nhận tỷ lệ lỗi `10.00%` (1 mẫu bị thất bại). Nguyên nhân do tần suất gửi dồn dập (Throughput đạt 0.28 req/s trên môi trường mạng cloud) khiến máy chủ mục tiêu phát sinh hiện tượng hàng đợi, dẫn đến 1 request bị quá thời gian phản hồi cho phép (`Max` đạt 34 giây). Việc xuất hiện lỗi nhỏ 5% tổng thể phản ánh đúng thực tế vận hành tải nặng của các kiến trúc Web Service.

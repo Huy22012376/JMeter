@@ -1,0 +1,50 @@
+{
+  "Controller - HTTP GET Trong Vong Lap" : {
+    "transaction" : "Controller - HTTP GET Trong Vong Lap",
+    "sampleCount" : 10,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 5674.5,
+    "medianResTime" : 964.5,
+    "minResTime" : 548.0,
+    "maxResTime" : 34089.0,
+    "pct1ResTime" : 32097.600000000006,
+    "pct2ResTime" : 34089.0,
+    "pct3ResTime" : 34089.0,
+    "throughput" : 0.1295840352468576,
+    "receivedKBytesPerSec" : 0.06112215725022677,
+    "sentKBytesPerSec" : 0.014046706945704288
+  },
+  "Total" : {
+    "transaction" : "Total",
+    "sampleCount" : 20,
+    "errorCount" : 1,
+    "errorPct" : 5.0,
+    "meanResTime" : 5022.300000000001,
+    "medianResTime" : 964.5,
+    "minResTime" : 463.0,
+    "maxResTime" : 34089.0,
+    "pct1ResTime" : 20513.800000000014,
+    "pct2ResTime" : 33443.149999999994,
+    "pct3ResTime" : 34089.0,
+    "throughput" : 0.25760581158710943,
+    "receivedKBytesPerSec" : 0.13828702600530668,
+    "sentKBytesPerSec" : 0.03861571492052861
+  },
+  "Controller - HTTP POST Thoa Dieu Kien" : {
+    "transaction" : "Controller - HTTP POST Thoa Dieu Kien",
+    "sampleCount" : 10,
+    "errorCount" : 1,
+    "errorPct" : 10.0,
+    "meanResTime" : 4370.1,
+    "medianResTime" : 1047.0,
+    "minResTime" : 463.0,
+    "maxResTime" : 21172.0,
+    "pct1ResTime" : 20513.800000000003,
+    "pct2ResTime" : 21172.0,
+    "pct3ResTime" : 21172.0,
+    "throughput" : 0.12996971705592597,
+    "receivedKBytesPerSec" : 0.07823567733718044,
+    "sentKBytesPerSec" : 0.02487701615523583
+  }
+}

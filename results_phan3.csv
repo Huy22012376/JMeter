@@ -1,0 +1,21 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1782114105815,619,Controller - HTTP GET Trong Vong Lap,200,OK,TG_Phan3 - Logic Controllers Group 1-1,text,true,,483,111,2,2,http://httpbin.org/get,614,0,287
+1782114106221,936,Controller - HTTP GET Trong Vong Lap,200,OK,TG_Phan3 - Logic Controllers Group 1-2,text,true,,483,111,2,2,http://httpbin.org/get,935,0,229
+1782114107161,1971,Controller - HTTP POST Thoa Dieu Kien,200,OK,TG_Phan3 - Logic Controllers Group 1-2,text,true,,648,196,2,2,http://httpbin.org/post,1971,0,230
+1782114109139,1408,Controller - HTTP GET Trong Vong Lap,200,OK,TG_Phan3 - Logic Controllers Group 1-2,text,true,,483,111,2,2,http://httpbin.org/get,1408,0,232
+1782114110552,643,Controller - HTTP POST Thoa Dieu Kien,200,OK,TG_Phan3 - Logic Controllers Group 1-2,text,true,,648,196,2,2,http://httpbin.org/post,642,0,229
+1782114111194,993,Controller - HTTP GET Trong Vong Lap,200,OK,TG_Phan3 - Logic Controllers Group 1-2,text,true,,483,111,2,2,http://httpbin.org/get,993,0,228
+1782114112191,784,Controller - HTTP POST Thoa Dieu Kien,200,OK,TG_Phan3 - Logic Controllers Group 1-2,text,true,,648,196,2,2,http://httpbin.org/post,783,0,231
+1782114112975,548,Controller - HTTP GET Trong Vong Lap,200,OK,TG_Phan3 - Logic Controllers Group 1-2,text,true,,483,111,2,2,http://httpbin.org/get,548,0,229
+1782114113531,836,Controller - HTTP POST Thoa Dieu Kien,200,OK,TG_Phan3 - Logic Controllers Group 1-2,text,true,,648,196,2,2,http://httpbin.org/post,836,0,229
+1782114106512,14590,Controller - HTTP POST Thoa Dieu Kien,200,OK,TG_Phan3 - Logic Controllers Group 1-1,text,true,,648,196,2,2,http://httpbin.org/post,14589,0,231
+1782114121103,598,Controller - HTTP GET Trong Vong Lap,200,OK,TG_Phan3 - Logic Controllers Group 1-1,text,true,,483,111,2,2,http://httpbin.org/get,598,0,229
+1782114121705,1372,Controller - HTTP POST Thoa Dieu Kien,200,OK,TG_Phan3 - Logic Controllers Group 1-1,text,true,,648,196,2,2,http://httpbin.org/post,1372,0,238
+1782114123078,2763,Controller - HTTP GET Trong Vong Lap,200,OK,TG_Phan3 - Logic Controllers Group 1-1,text,true,,483,111,2,2,http://httpbin.org/get,2763,0,230
+1782114114375,14175,Controller - HTTP GET Trong Vong Lap,200,OK,TG_Phan3 - Logic Controllers Group 1-2,text,true,,483,111,2,2,http://httpbin.org/get,14175,0,231
+1782114128553,612,Controller - HTTP POST Thoa Dieu Kien,200,OK,TG_Phan3 - Logic Controllers Group 1-2,text,true,,648,196,2,2,http://httpbin.org/post,612,0,228
+1782114125844,21172,Controller - HTTP POST Thoa Dieu Kien,200,OK,TG_Phan3 - Logic Controllers Group 1-1,text,true,,648,196,1,1,http://httpbin.org/post,21172,0,232
+1782114147017,616,Controller - HTTP GET Trong Vong Lap,200,OK,TG_Phan3 - Logic Controllers Group 1-1,text,true,,483,111,1,1,http://httpbin.org/get,616,0,230
+1782114147637,1258,Controller - HTTP POST Thoa Dieu Kien,200,OK,TG_Phan3 - Logic Controllers Group 1-1,text,true,,648,196,1,1,http://httpbin.org/post,1258,0,228
+1782114148896,34089,Controller - HTTP GET Trong Vong Lap,200,OK,TG_Phan3 - Logic Controllers Group 1-1,text,true,,483,111,1,1,http://httpbin.org/get,34089,0,227
+1782114182990,463,Controller - HTTP POST Thoa Dieu Kien,503,Service Temporarily Unavailable,TG_Phan3 - Logic Controllers Group 1-1,text,false,,332,196,1,1,http://httpbin.org/post,462,0,234

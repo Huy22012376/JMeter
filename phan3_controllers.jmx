@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Phan 3 - Logic Controllers" enabled="true"/>
+    <hashTree>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="chay_post_request" elementType="Argument">
+            <stringProp name="Argument.name">chay_post_request</stringProp>
+            <stringProp name="Argument.value">true</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG_Phan3 - Logic Controllers Group" enabled="true">
+        <intProp name="ThreadGroup.num_threads">2</intProp>
+        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <longProp name="ThreadGroup.duration">0</longProp>
+        <longProp name="ThreadGroup.delay">0</longProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">5</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+      </ThreadGroup>
+      <hashTree>
+
+        <!-- THÊM TIMER: Ép mỗi user nghỉ 1.5 giây trước khi thực hiện vòng lặp tiếp theo để tránh bị chặn IP -->
+        <ConstantTimer guiclass="TestBeanGUI" testclass="ConstantTimer" testname="Thoi gian cho 1.5 giay" enabled="true">
+          <stringProp name="Delay">1500</stringProp>
+        </ConstantTimer>
+        <hashTree/>
+
+        <!-- 1. BỘ ĐIỀU KHIỂN VÒNG LẶP: LOOP CONTROLLER (Ép lặp lại 3 lần) -->
+        <GenericController guiclass="LogicAnalyzerGui" testclass="LoopController" testname="Loop Controller (Lap 3 lan)" enabled="true">
+          <stringProp name="LoopController.loops">3</stringProp>
+        </GenericController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Controller - HTTP GET Trong Vong Lap" enabled="true">
+            <stringProp name="HTTPSampler.domain">httpbin.org</stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.path">/get</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+
+        <!-- 2. BỘ ĐIỀU KHIỂN ĐIỀU KIỆN: IF CONTROLLER (Chỉ chạy nếu biến là true) -->
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller (Kiem tra dieu kien)" enabled="true">
+          <stringProp name="IfController.condition">&quot;${chay_post_request}&quot; == &quot;true&quot;</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">false</boolProp>
+        </IfController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Controller - HTTP POST Thoa Dieu Kien" enabled="true">
+            <stringProp name="HTTPSampler.domain">httpbin.org</stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.path">/post</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
