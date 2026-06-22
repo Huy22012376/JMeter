@@ -138,3 +138,48 @@ Kết quả thực thi kịch bản điều khiển logic ghi nhận độ phân
 
 * **Đánh giá logic:** Bộ điều khiển `If Controller` đã hoạt động chính xác theo đúng thiết kế kỹ thuật, nhận diện biến cấu hình là `true` để cho phép các yêu cầu POST truyền tải thành công. 
 * **Phân tích hiện tượng lỗi (Error Analysis):** Yêu cầu POST ghi nhận tỷ lệ lỗi `10.00%` (1 mẫu bị thất bại). Nguyên nhân do tần suất gửi dồn dập (Throughput đạt 0.28 req/s trên môi trường mạng cloud) khiến máy chủ mục tiêu phát sinh hiện tượng hàng đợi, dẫn đến 1 request bị quá thời gian phản hồi cho phép (`Max` đạt 34 giây). Việc xuất hiện lỗi nhỏ 5% tổng thể phản ánh đúng thực tế vận hành tải nặng của các kiến trúc Web Service.
+
+---
+
+## 🛠️ HƯỚNG DẪN CHẠY DỰ ÁN TRÊN GITHUB CODESPACES
+
+Để tái hiện hoặc kiểm tra lại toàn bộ kết quả thực hiện của dự án này, vui lòng khởi tạo môi trường GitHub Codespace trên Repo và thực hiện lần lượt các bước sau tại cửa sổ **Terminal**:
+
+### Bước 1: Thiết lập môi trường và Cài đặt Jmeter
+Chạy chuỗi lệnh cập nhật hệ thống, cài đặt môi trường Java JRE và tải/giải nén bộ công cụ Apache JMeter v5.6.3:
+```bash
+# 1. Cập nhật gói hệ thống
+sudo apt update -y
+
+# 2. Cài đặt Java môi trường (Bắt buộc cho JMeter)
+sudo apt install default-jre -y
+
+# 3. Tải bộ cài JMeter chuẩn
+wget https://apache.org
+
+# 4. Giải nén bộ công cụ
+tar -xf apache-jmeter-5.6.3.tgz
+```
+
+### Bước 2: Thực thi các kịch bản kiểm thử (Chế độ CLI / Non-GUI)
+Tùy thuộc vào phần bạn muốn kiểm tra, hãy copy và chạy câu lệnh tương ứng dưới đây:
+
+* **Chạy kịch bản Phần 1 (Thread Groups):**
+  ```bash
+  rm -f results.csv && rm -rf report_output && ./apache-jmeter-5.6.3/bin/jmeter -n -t test.jmx -l results.csv -e -o report_output
+  ```
+* **Chạy kịch bản Phần 2 (HTTP Samplers nâng cao):**
+  ```bash
+  ./apache-jmeter-5.6.3/bin/jmeter -n -t phan2_samplers.jmx -l results_phan2.csv -e -o report_phan2
+  ```
+* **Chạy kịch bản Phần 3 (Bộ điều khiển Logic Controllers):**
+  ```bash
+  ./apache-jmeter-5.6.3/bin/jmeter -n -t phan3_controllers.jmx -l results_phan3.csv -e -o report_phan3
+  ```
+
+### Bước 3: Xem báo cáo đồ thị trực quan (Dashboard Report)
+Khởi tạo máy chủ cục bộ mini bằng Python để xem trực tiếp các biểu đồ phân tích hiệu năng:
+```bash
+python3 -m http.server 8000
+```
+*Sau khi chạy lệnh trên, nhấn vào nút **Open in Browser** hiện ra ở góc phải màn hình Codespace để truy cập giao diện web báo cáo tương ứng.*
